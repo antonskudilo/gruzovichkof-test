@@ -33,12 +33,12 @@
                 axios
                     .get('/api/retrieve/' + this.id)
                     .then((response) => {
-                        if (response.data.number) {
-                            this.error = false;
-                            this.number = response.data.number;
-                        } else {
+                        if (response.data.error) {
                             this.number = null;
                             this.error = true
+                        } else if (response.data.number) {
+                            this.error = false;
+                            this.number = response.data.number;
                         }
                     })
                     .catch((error) => {

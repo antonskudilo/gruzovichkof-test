@@ -10,7 +10,14 @@
             </tr>
             </thead>
             <tbody>
-            <template v-if="!numbers.length">
+            <template v-if="loading">
+                <tr>
+                    <td colspan="3" class="text-center">
+                        Загрузка...
+                    </td>
+                </tr>
+            </template>
+            <template v-if="!loading && !numbers.length">
                 <tr>
                     <td colspan="3" class="text-center">
                         Нет чисел
@@ -34,7 +41,8 @@
         name: "List",
         data() {
             return {
-                numbers: []
+                numbers: [],
+                loading: true
             }
         },
         mounted() {
@@ -45,6 +53,7 @@
                 axios
                     .get('/api/list/')
                     .then((response) => {
+                        this.loading = false;
                         this.numbers = response.data.numbers;
                     })
                     .catch((error) => {

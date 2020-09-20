@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['namespace' => 'App\Http\Controllers\API'], function () {
     Route::get('/generate', 'NumbersController@generate');
-    Route::get('/retrieve/{id}', 'NumbersController@retrieve')->where('id', '[0-9]+');
+    Route::get('/retrieve/{id}', 'NumbersController@retrieve');
     Route::get('/list', 'NumbersController@index');
 });
